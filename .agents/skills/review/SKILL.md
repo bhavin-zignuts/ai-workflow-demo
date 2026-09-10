@@ -11,7 +11,7 @@ Sharp, actionable review without writing code. Evidence-based: every finding inc
 ## Inputs
 
 - A review target: local diff in the workspace, or a remote branch/PR.
-- Optional: `target_branch` (the base branch to compare against, defaults to `origin/master`).
+- Optional: `target_branch` (the base branch to compare against, defaults to auto-detected default branch, e.g. `origin/main` or `origin/master`).
 - Optional: `task_type` (tunes severity).
 - Optional: `size` (drives reviewer isolation, below).
 
@@ -29,15 +29,16 @@ For fresh-context reviews, the prompt must include: the full diff, the AC from i
 ## Procedure
 
 1. **Load the diff.**
-   - **For local changes / current branch:** Determine the target branch (default `origin/master`). Run `git merge-base <target_branch> HEAD` to get the common ancestor, then run `git diff <ancestor_hash> HEAD` to capture changes specific to this branch.
+   - **For local changes / current branch:** Determine the target branch (auto-detect `origin/main`, `origin/master`, or use `git symbolic-ref refs/remotes/origin/HEAD` / local base). Run `git merge-base <target_branch> HEAD` to get the common ancestor, then run `git diff <ancestor_hash> HEAD` to capture changes specific to this branch.
    - **For a Pull Request (PR) / Remote Branch:** Fetch the remote branch, then run `git diff <target_branch>...<remote_branch>` (triple-dot diff is recommended to compare only the changes introduced in the feature branch).
 
-2. **Apply the five quality pillars:**
+2. **Apply the six quality pillars:**
    - **Validation:** are inputs checked at every external boundary?
    - **Global impact:** does this change ripple in non-obvious ways?
    - **Pattern consistency:** does the change follow the codebase's idioms?
    - **Logic vs syntax:** is the code doing the right thing, not just compiling?
    - **Dead/Unused Code:** does the diff introduce unused imports, dead/unreachable branches, unused local variables, or unused function parameters?
+   - **Accessibility (WCAG 2.2 AA):** does the diff introduce div-buttons (`<div onClick>`), missing focus indicators (`outline-none` without `focus-visible:`), or unlabelled icon buttons?
 
 3. **Categorize findings:**
    - **critical** — must fix before merge (bug, security, data loss, contract break, missing rescue on a user-facing failure path).

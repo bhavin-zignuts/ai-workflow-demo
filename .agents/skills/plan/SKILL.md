@@ -28,8 +28,8 @@ Write the plan a human will approve. Vague plans produce vague implementations. 
    | ----------------- | ------------------------------------------------------------------- |
    | Security          | Auth boundaries, injection surfaces, data exposure, secret handling |
    | Performance       | Hot paths, N+1 queries, payload size, caching, pagination           |
-   | Reusability       | Existing patterns to follow, shared utilities to leverage           |
-   | Readability       | Naming clarity, structural complexity, separation of concerns       |
+   | Reusability       | Existing patterns & components to reuse first before creating new ones |
+   | Readability       | Naming clarity, structural complexity, splitting components when feasible (aiming < 500 LOC per file) |
    | Cross-team impact | Other repos, teams, APIs, or contracts affected                     |
 
 3. **Failure-mode table.** For each method or endpoint being added/changed, enumerate failure modes:

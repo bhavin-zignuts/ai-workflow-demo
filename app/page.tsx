@@ -109,48 +109,84 @@ export default function Home() {
   ];
 
   // Agent Skills Data
+  // Agent Skills Data (11 Skills: 10 Universal + 1 Showcase)
   const skillsList: SkillItem[] = [
+    {
+      id: "feature",
+      name: "Feature Orchestrator",
+      description: "Master coordinator that drives features through intake, research, plan, implement, and review with human approval gates.",
+      meta: "Core · Master Orchestrator",
+      accent: "from-indigo-500/20 to-violet-500/10 border-indigo-500/30"
+    },
     {
       id: "intake",
       name: "Intake",
-      description: "Slices incoming feature tickets into structured deliverables, validating success criteria early.",
-      meta: "Skill 1 · Intake Analysis",
+      description: "Slices incoming feature tickets or prompts into structured deliverables, validating success criteria early.",
+      meta: "Pipeline Stage 1 · Requirements",
       accent: "from-blue-500/20 to-indigo-500/10 border-blue-500/30"
     },
     {
       id: "research",
       name: "Research",
-      description: "Explores files to auto-detect codebase conventions and dependencies, laying robust foundations.",
-      meta: "Skill 2 · Code Explorer",
+      description: "Explores files to auto-detect codebase conventions and dependencies, laying robust evidence-based foundations.",
+      meta: "Pipeline Stage 2 · Code Explorer",
       accent: "from-cyan-500/20 to-teal-500/10 border-cyan-500/30"
     },
     {
       id: "plan",
       name: "Plan",
-      description: "Builds structured implementation proposals with safety buffers and security risk assessments.",
-      meta: "Skill 3 · Technical Planner",
+      description: "Builds structured implementation proposals with safety buffers, quality analysis, and failure-mode tables.",
+      meta: "Pipeline Stage 3 · Technical Blueprint",
       accent: "from-emerald-500/20 to-green-500/10 border-emerald-500/30"
     },
     {
       id: "implement",
       name: "Implement",
-      description: "Executes plan modifications carefully, validating state and testing incremental additions.",
-      meta: "Skill 4 · Code Synthesizer",
+      description: "Executes plan modifications file-by-file, maintaining clean working trees and stopping on verification failures.",
+      meta: "Pipeline Stage 4 · Code Synthesizer",
       accent: "from-amber-500/20 to-orange-500/10 border-amber-500/30"
     },
     {
       id: "review",
       name: "Review",
-      description: "Ensures code quality by analyzing the final local Git diffs against strict guidelines.",
-      meta: "Skill 5 · Code Auditor",
+      description: "Ensures code quality by analyzing the final local Git diff against 6 quality pillars with a strict GO/NO-GO verdict.",
+      meta: "Pipeline Stage 5 · Code Auditor",
       accent: "from-rose-500/20 to-pink-500/10 border-rose-500/30"
     },
     {
       id: "debug",
       name: "Debug",
-      description: "Traces failures deterministically, compiling test cases and identifying root causes.",
-      meta: "Skill 6 · Root Cause Analyst",
+      description: "Scientific root-cause analysis: deterministic reproduction, competing hypotheses, and minimal disproofs.",
+      meta: "Engineering · Root Cause Analyst",
       accent: "from-purple-500/20 to-violet-500/10 border-purple-500/30"
+    },
+    {
+      id: "frontend-design",
+      name: "Frontend Design",
+      description: "Distinctive, intentional visual design guidance, deliberate typography scales, and human copywriting without AI clichés.",
+      meta: "Design · Anti-Cliché UI/UX",
+      accent: "from-fuchsia-500/20 to-pink-500/10 border-fuchsia-500/30"
+    },
+    {
+      id: "react-development",
+      name: "React Development",
+      description: "Production React & Next.js conventions: sub-500 LOC guidelines, component splitting, RHF + Zod, and TanStack Query.",
+      meta: "Engineering · React & Next.js",
+      accent: "from-sky-500/20 to-blue-500/10 border-sky-500/30"
+    },
+    {
+      id: "accessibility",
+      name: "Accessibility (WCAG AA)",
+      description: "POUR principles, WCAG 2.2 Level AA compliance, native semantic HTML, visible focus rings, and screen-reader support.",
+      meta: "Quality · WCAG 2.2 AA",
+      accent: "from-teal-500/20 to-emerald-500/10 border-teal-500/30"
+    },
+    {
+      id: "landing-design-system",
+      name: "Landing Design System",
+      description: "Project-specific tokens, Framer-inspired dark aesthetic, GT Walsheim display typography, and atmospheric spotlight cards.",
+      meta: "Showcase · Landing Page Tokens",
+      accent: "from-zinc-500/20 to-zinc-700/10 border-zinc-500/30"
     }
   ];
 
@@ -163,12 +199,12 @@ export default function Home() {
       subtitle: "Workspace Companion",
       description: "Google DeepMind's agentic workspace orchestrator. Runs natively inside the Antigravity IDE using built-in skills.",
       setupInstructions: [
-        "Discovers skill manifests automatically within the workspace root under `.agents/`.",
-        "Allows direct invocation of orchestrator steps using command prompts.",
+        "Discovers skill manifests automatically within the workspace root under `.agents/skills/`.",
+        "Allows direct invocation of orchestrator steps using command prompts (e.g. `@feature`).",
         "Loads global rules from ~/.gemini/config and local rules from AGENTS.md dynamically."
       ],
-      configLabel: "",
-      configContent: ""
+      configLabel: "Sample Antigravity Prompt",
+      configContent: "@feature Implement the user profile settings modal"
     },
     {
       id: "claude",
@@ -181,8 +217,8 @@ export default function Home() {
         "Loads configuration commands and style guidelines automatically from `CLAUDE.md`.",
         "To link skills, execute: `ln -s ../.agents/skills .claude/skills`"
       ],
-      configLabel: "",
-      configContent: ""
+      configLabel: "Terminal Setup & Run",
+      configContent: "ln -s ../.agents/skills .claude/skills\nclaude --prompt 'Run @feature to build the next ticket'"
     },
     {
       id: "copilot",
@@ -195,8 +231,8 @@ export default function Home() {
         "Consumes prompt configurations automatically from `.github/copilot-instructions.md`.",
         "To link skills, execute: `ln -s ../.agents/skills .github/skills`"
       ],
-      configLabel: "",
-      configContent: ""
+      configLabel: "Terminal Setup",
+      configContent: "ln -s ../.agents/skills .github/skills"
     }
   ];
 
@@ -228,10 +264,10 @@ export default function Home() {
             <a href="#orchestrator" className="hover:text-white transition-colors">Master Orchestrator</a>
             <a href="#setup" className="hover:text-white transition-colors">Assistants Setup</a>
             <a 
-              href="file:///Users/ztlab157/Work-Projects/ai-workflow-demo/AGENTS.md" 
+              href="#setup" 
               className="hover:text-white transition-colors"
             >
-              AGENTS.md
+              AGENTS.md & Rules
             </a>
           </nav>
 
@@ -318,16 +354,20 @@ export default function Home() {
                   <h4 className="text-xl font-bold text-white mb-3 group-hover:text-[#0099ff] transition-colors">{skill.name}</h4>
                   <p className="text-zinc-400 text-sm leading-relaxed">{skill.description}</p>
                 </div>
-                <div className="mt-8 flex items-center justify-between">
-                  <a 
-                    href={`file:///Users/ztlab157/Work-Projects/ai-workflow-demo/.agents/skills/${skill.id}/SKILL.md`}
-                    className="text-xs font-medium text-zinc-400 hover:text-white inline-flex items-center gap-1.5 transition-colors"
+                <div className="mt-8 flex items-center justify-between pt-4 border-t border-white/[0.04]">
+                  <span className="text-[11px] font-mono text-zinc-500 truncate max-w-[170px]">
+                    .agents/skills/{skill.id}
+                  </span>
+                  <button 
+                    onClick={() => handleCopy(`.agents/skills/${skill.id}/SKILL.md`)}
+                    className="text-xs font-medium text-zinc-400 hover:text-white inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+                    title="Click to copy path"
                   >
-                    View Manifest
-                    <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                    Copy Path
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -365,12 +405,12 @@ export default function Home() {
               </div>
 
               <div className="mt-8">
-                <a
-                  href="file:///Users/ztlab157/Work-Projects/ai-workflow-demo/.agents/skills/feature/SKILL.md"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-full bg-zinc-900 border border-white/10 text-white hover:bg-zinc-800 transition-colors"
+                <button
+                  onClick={() => handleCopy('.agents/skills/feature/SKILL.md')}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold rounded-full bg-zinc-900 border border-white/10 text-white hover:bg-zinc-800 transition-colors cursor-pointer"
                 >
-                  View Orchestrator SKILL.md
-                </a>
+                  Copy Orchestrator Path (.agents/skills/feature)
+                </button>
               </div>
             </div>
 
@@ -499,13 +539,15 @@ export default function Home() {
                   <div className="text-xs font-semibold text-zinc-500 uppercase tracking-widest mb-3">Associated Manifests & Documents</div>
                   <div className="flex flex-wrap gap-3">
                     {pipelineSteps[activePipelineStep].files.map((file, fIdx) => (
-                      <a
+                      <button
                         key={fIdx}
-                        href={`file:///Users/ztlab157/Work-Projects/ai-workflow-demo/${file}`}
-                        className="px-4 py-2 rounded-lg bg-zinc-900 border border-white/5 text-xs text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors font-mono"
+                        onClick={() => handleCopy(file)}
+                        title="Click to copy path"
+                        className="px-4 py-2 rounded-lg bg-zinc-900 border border-white/5 text-xs text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors font-mono cursor-pointer flex items-center gap-2"
                       >
-                        {file}
-                      </a>
+                        <span>{file}</span>
+                        <span className="text-[10px] text-zinc-500">📋</span>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -619,22 +661,22 @@ export default function Home() {
           </div>
           <div className="flex gap-6 text-xs">
             <a 
-              href="file:///Users/ztlab157/Work-Projects/ai-workflow-demo/AGENTS.md" 
+              href="#setup" 
               className="hover:text-white transition-colors"
             >
-              AGENTS.md
+              AGENTS.md Setup
             </a>
             <a 
-              href="file:///Users/ztlab157/Work-Projects/ai-workflow-demo/CLAUDE.md" 
+              href="#setup" 
               className="hover:text-white transition-colors"
             >
-              CLAUDE.md
+              CLAUDE.md Rules
             </a>
             <a 
-              href="file:///Users/ztlab157/Work-Projects/ai-workflow-demo/README.md" 
+              href="#skills" 
               className="hover:text-white transition-colors"
             >
-              README.md
+              All 11 Skills
             </a>
           </div>
           <div className="text-xs">

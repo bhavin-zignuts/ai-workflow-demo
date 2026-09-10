@@ -1,7 +1,7 @@
 ---
-name: design-system
+name: landing-design-system
 description: >-
-  Use this skill when implementing UI designs, styling components, or adjusting colors, typography, and layouts according to the Framer-like dark design system.
+  Use this skill when implementing UI designs, styling components, or adjusting colors, typography, and layouts for this project's landing page according to the Framer-like dark design system.
 ---
 
 ## Overview

@@ -50,7 +50,7 @@ body {
   animation: pulseGlow 10s ease-in-out infinite;
 }
 
-/* Bespoke Inter typography OpenType character variants (as per design-system/SKILL.md) */
+/* Bespoke Inter typography OpenType character variants (as per landing-design-system/SKILL.md) */
 .font-sans-framer {
   font-feature-settings: "cv01" 1, "cv05" 1, "cv09" 1, "cv11" 1, "ss03" 1, "ss07" 1, "dlig" 1;
 }

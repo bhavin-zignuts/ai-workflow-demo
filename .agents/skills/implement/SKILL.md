@@ -20,7 +20,7 @@ Turn the approved plan into reviewed-quality code on the current checked-out bra
 
 2. **For each plan step:**
    1. Re-read the step.
-   2. Make the change. Edit existing files in preference to creating new ones.
+   2. Make the change. Edit existing files in preference to creating new ones. Search for existing components to reuse before introducing new UI elements. Split components into sub-components when practical (aiming to keep files under 500 LOC for human readability).
    3. Run the verification declared in the plan (typecheck, manual check, command).
    4. If verification fails: fix the issue, don't bypass. If you can't fix in ≤3 attempts, stop and report a blocker — do not paper over.
 
